@@ -826,6 +826,9 @@
       letter-spacing: .04em;
     }
 
+    /* Mobile slide text – hidden on desktop */
+    .mobile-slide-text { display: none; }
+
     /* Slider dots */
     .slider-dots {
       position: absolute;
@@ -956,6 +959,38 @@
       .hero-title { font-size: clamp(1.8rem, 6vw, 3rem); text-shadow: 0 2px 12px rgba(0,0,0,.5); }
       .hero-sub { font-size: .82rem; color: var(--text); }
       .slide-caption { display: none; }
+      .hero-content {
+        margin-top: -50px;
+      }
+      .mobile-slide-text {
+        display: block;
+        position: absolute;
+        z-index: 4;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 110px;
+        text-align: center;
+        max-width: 85vw;
+        width: 85vw;
+        pointer-events: none;
+      }
+      .mobile-slide-text p {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-size: .82rem;
+        font-weight: 300;
+        color: rgba(255,255,255,.85);
+        line-height: 1.7;
+        letter-spacing: .04em;
+        text-shadow: 0 1px 10px rgba(0,0,0,.5);
+        opacity: 0;
+        transition: opacity .6s ease;
+      }
+      .mobile-slide-text p.active {
+        opacity: 1;
+      }
 
       /* PROPERTIES */
       .properties { padding: 48px 12px; }
@@ -1055,6 +1090,12 @@
     <h1 class="hero-title">Yaşam Kalitenizi<br><em>Arttıracak Mülkler</em></h1>
     <p class="hero-sub">İstanbul ve Bodrum'un En Prestijli Gayrimenkulleriyle Hayalinizi Gerçekleştirin</p>
 
+  </div>
+  <!-- Mobile slide captions (shown below hero-content on mobile) -->
+  <div class="mobile-slide-text" id="mobileSlideText">
+    <p class="active">Doğanın içinde standartların ötesinde ayrıcalıklı yaşam.</p>
+    <p>Hayalinizdeki yaşam bu villada gerçek oluyor!</p>
+    <p>Doğayla iç içe modern yaşam alanları</p>
   </div>
   <div class="slider-dots" id="sliderDots">
     <div class="dot active" onclick="goToSlide(0)"></div>
@@ -1320,9 +1361,13 @@
     window.goToSlide = function(n) {
       slides[current].classList.remove('active');
       if (dots[current]) dots[current].classList.remove('active');
+      // Sync mobile slide text
+      var mTexts = document.querySelectorAll('#mobileSlideText p');
+      if (mTexts[current]) mTexts[current].classList.remove('active');
       current = ((n % slides.length) + slides.length) % slides.length;
       slides[current].classList.add('active');
       if (dots[current]) dots[current].classList.add('active');
+      if (mTexts[current]) mTexts[current].classList.add('active');
       clearInterval(timer);
       startProgress();
       timer = setInterval(function(){ window.goToSlide(current + 1); }, DURATION);
