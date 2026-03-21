@@ -209,9 +209,8 @@
     /* ── PAGE HERO ── */
     .page-hero {
       position: relative;
-      height: 72vh;
-      min-height: 520px;
-      padding-top: 80px;
+      min-height: 72vh;
+      padding-top: 120px;
       display: flex; align-items: flex-end;
       overflow: hidden;
     }
@@ -259,7 +258,7 @@
     }
     .page-hero-content {
       position: relative; z-index: 2;
-      padding: 0 80px 72px;
+      padding: 0 80px 72px 20px;
       animation: fadeUp .9s ease both;
       max-width: 800px;
     }
@@ -269,12 +268,12 @@
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 20px;
-      display: flex; align-items: center; gap: 14px;
+      display: flex; align-items: center; gap: 12px;
     }
     .page-hero-eyebrow::before {
       content: '';
       display: inline-block;
-      width: 32px; height: 1px;
+      width: 28px; height: 1px;
       background: var(--gold);
     }
     .page-hero-title {
@@ -885,7 +884,7 @@
       .btn-sell { display: none; }
 
       section { padding: 64px 20px; }
-      .page-hero-content { padding: 0 20px 56px; }
+      .page-hero-content { padding: 0 20px 56px; width: 100%; margin-left: -20px; }
       .page-hero-title { font-size: clamp(2.4rem, 8vw, 4rem); }
 
       .about-intro {
