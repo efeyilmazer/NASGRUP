@@ -386,7 +386,48 @@
     /* ── FEATURED PROPERTIES ── */
     .properties {
       padding: 80px 48px;
-      background: var(--dark);
+      background: linear-gradient(135deg, #0a0804 0%, #1a1208 45%, #0e0e0e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .properties::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(180,154,106,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180,154,106,.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+    .properties::after {
+      content: 'NAS';
+      position: absolute;
+      right: -40px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cinzel', serif;
+      font-size: clamp(120px, 20vw, 240px);
+      font-weight: 700;
+      color: rgba(180,154,106,.04);
+      letter-spacing: -.04em;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .prop-deco-line {
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%; height: 100%;
+      background: linear-gradient(135deg, transparent 50%, rgba(180,154,106,.04) 50%);
+      pointer-events: none;
+    }
+    .prop-deco-orb {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(180,154,106,.09) 0%, transparent 70%);
+      top: 30%; left: 30%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
     }
 
     .prop-grid {
@@ -969,13 +1010,16 @@
 
 <!-- FEATURED PROPERTIES -->
 <section class="properties reveal" id="kesfet">
-  <div class="section-header">
+  <div class="prop-deco-line"></div>
+  <div class="prop-deco-orb"></div>
+  <div class="section-header" style="flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;">
     <div>
       <p class="section-label">Öne Çıkan</p>
-      <h2 class="section-title">Seçkin <em>Mülkler</em></h2>
+      <h2 class="section-title" style="color:var(--gold-light);">Seçkin <em>Mülkler</em></h2>
+      <p style="max-width:640px;margin:18px auto 0;font-size:.95rem;color:var(--muted);line-height:1.8;font-weight:300;">Nas Grup Gayrimenkul olarak gayrimenkul sektöründeki yolculuğumuza sadece konut satmak için değil, modern yaşamın standartlarını yeniden tanımlayan yaşam alanları sunmak için çıktık.</p>
     </div>
   </div>
-  <div class="prop-grid">
+  <div class="prop-grid" style="position:relative;z-index:1;">
 
     <a href="maison-bodrum.html" style="text-decoration:none;color:inherit;display:block;" class="prop-card">
       <div class="prop-img">
