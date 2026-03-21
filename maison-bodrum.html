@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maison Bodrum — Nas Grup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Cinzel:wght@400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #b49a6a; --gold-light: #d4b896; --dark: #0e0e0e; --dark2: #1a1a1a; --dark3: #252525; --text: #e8e0d4; --muted: #8a8178; --white: #faf8f4; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--text); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+    button, a { user-select: none; -webkit-user-select: none; cursor: pointer; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: rgba(10,10,10,.97); border-bottom: 1px solid rgba(180,154,106,.1); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; text-decoration: none; display: flex; align-items: baseline; gap: 1px; }
+    .logo-grup { font-family: "Cinzel", serif; font-size: 30px; font-weight: 400; color: var(--white); letter-spacing: .12em; }
+    .logo-nas { font-family: "Cinzel", serif; font-size: 30px; font-weight: 500; color: var(--gold); letter-spacing: .12em; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-size: .75rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--text); text-decoration: none; transition: color .25s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .btn-back { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; padding: 9px 22px; border: 1px solid var(--gold); color: var(--gold); background: transparent; transition: all .25s; font-family: 'Jost', sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-back:hover { background: var(--gold); color: var(--dark); }
+    .btn-back svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--gold); }
+    .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,10,10,.97); z-index: 1001; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--text); text-decoration: none; letter-spacing: .1em; transition: color .25s; }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--gold); font-size: 1.8rem; cursor: pointer; }
+    .page-hero { position: relative; height: 72vh; min-height: 520px; display: flex; align-items: flex-end; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0a0804 0%, #1a1208 45%, #0e0e0e 100%); }
+    .page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(180,154,106,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(180,154,106,.04) 1px, transparent 1px); background-size: 80px 80px; }
+    .page-hero-line { position: absolute; top: 0; right: 0; width: 55%; height: 100%; background: linear-gradient(135deg, transparent 50%, rgba(180,154,106,.04) 50%); pointer-events: none; }
+    .page-hero-wm { position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-family: 'Cinzel', serif; font-size: clamp(100px, 18vw, 220px); font-weight: 700; color: rgba(180,154,106,.04); letter-spacing: -.04em; line-height: 1; pointer-events: none; user-select: none; }
+    .page-hero-orb { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(180,154,106,.09) 0%, transparent 70%); top: 30%; left: 30%; transform: translate(-50%, -50%); }
+    .page-hero-content { position: relative; z-index: 2; padding: 0 80px 72px; animation: fadeUp .9s ease both; max-width: 800px; }
+    .page-hero-eyebrow { font-size: .68rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+    .page-hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--gold); }
+    .page-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 6.5rem); font-weight: 300; line-height: 1; color: var(--white); margin-bottom: 28px; letter-spacing: -.01em; }
+    .page-hero-title em { font-style: italic; color: var(--gold-light); }
+    .page-hero-sub { font-size: 1rem; font-weight: 300; color: var(--muted); letter-spacing: .05em; max-width: 560px; line-height: 1.85; }
+    .hero-divider { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(180,154,106,.2) 20%, rgba(180,154,106,.2) 80%, transparent); }
+    .section { padding: 80px 48px; }
+    .section--dark { background: var(--dark); }
+    .section--dark2 { background: var(--dark2); }
+    .section-eyebrow { font-size: .65rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--gold); }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--white); line-height: 1.15; margin-bottom: 24px; }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-desc { font-size: .92rem; color: var(--muted); line-height: 1.85; max-width: 640px; margin-bottom: 40px; }
+    .gold-line { width: 60px; height: 1px; background: linear-gradient(to right, var(--gold), transparent); margin-bottom: 32px; }
+    .full-img { width: 100%; display: block; border: 1px solid rgba(180,154,106,.08); }
+    .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .img-row img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid rgba(180,154,106,.08); }
+    .img-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+    .img-trio img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid rgba(180,154,106,.08); aspect-ratio: 4/3; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 40px 0; }
+    .stat-card { background: var(--dark3); padding: 40px 32px; text-align: center; border: 1px solid rgba(180,154,106,.06); }
+    .stat-num { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 500; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+    .feature-item { background: var(--dark3); padding: 24px 20px; border: 1px solid rgba(180,154,106,.06); display: flex; align-items: center; gap: 16px; transition: border-color .3s; }
+    .feature-item:hover { border-color: rgba(180,154,106,.25); }
+    .feature-icon { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180,154,106,.2); border-radius: 50%; color: var(--gold); font-size: .95rem; }
+    .feature-text { font-size: .82rem; color: var(--text); letter-spacing: .04em; line-height: 1.5; }
+    .cta-bottom { padding: 80px 48px; background: var(--dark2); text-align: center; border-top: 1px solid rgba(180,154,106,.08); }
+    .cta-bottom .section-eyebrow { justify-content: center; }
+    .cta-bottom .section-title { margin: 0 auto 12px; }
+    .cta-bottom p { color: var(--muted); margin-bottom: 32px; font-size: .92rem; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: var(--dark); padding: 16px 36px; font-family: 'Jost', sans-serif; font-size: .72rem; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; transition: background .25s, gap .25s; }
+    .btn-gold:hover { background: var(--gold-light); gap: 18px; }
+    .btn-gold svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .page-footer { background: var(--dark); padding: 32px 48px; border-top: 1px solid rgba(180,154,106,.08); display: flex; align-items: center; justify-content: space-between; }
+    .page-footer span { font-size: .72rem; color: var(--muted); }
+    .floating { position: fixed; right: 24px; bottom: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 900; }
+    .float-btn { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+    .float-btn:hover { transform: scale(1.1); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+    .float-call { background: var(--gold); color: var(--dark); }
+    .float-btn svg { width: 20px; height: 20px; fill: currentColor; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 900px) {
+      nav { padding: 14px 20px; } .nav-links { display: none; } .hamburger { display: flex; } .btn-back { display: none; }
+      .page-hero { height: 50vh; min-height: 360px; } .page-hero-content { padding: 0 24px 40px; } .page-hero-title { font-size: clamp(2.4rem, 8vw, 4rem); }
+      .section { padding: 48px 20px; } .img-row, .img-trio { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr; } .features-grid { grid-template-columns: 1fr; }
+      .cta-bottom { padding: 48px 20px; } .page-footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 480px) { .page-hero-title { font-size: 2rem; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="anasayfa.html"><span class="logo-nas">NAS</span><span class="logo-grup"> Grup</span></a>
+  <ul class="nav-links">
+    <li><a href="anasayfa.html">Ana Sayfa</a></li>
+    <li><a href="satilik.html" class="active">Satılık</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <a class="btn-back" href="satilik.html"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Geri Dön</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="anasayfa.html">Ana Sayfa</a><a href="satilik.html">Satılık</a><a href="hakkimizda.html">Hakkımızda</a><a href="iletisim.html">İletişim</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-grid"></div><div class="page-hero-line"></div><div class="page-hero-orb"></div>
+  <div class="page-hero-wm">MAISON</div>
+  <div class="page-hero-content">
+    <p class="page-hero-eyebrow">Proje Detay</p>
+    <h1 class="page-hero-title">Maison<br><em>Bodrum</em></h1>
+    <p class="page-hero-sub">Bodrum'un kalbinde, geleneksel Ege mimarisinin modern konforla buluştuğu, doğayla iç içe huzur dolu bir yaşam sizi bekliyor.</p>
+  </div>
+  <div class="hero-divider"></div>
+</section>
+
+<section class="section section--dark2 reveal">
+  <p class="section-eyebrow">Huzur Dolu Bir Yaşam Sizi Bekliyor</p>
+  <h2 class="section-title">Doğanın İçinde <em>Prestijli Villalar</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">İSRA Mimarlık imzasıyla tasarlanan Maison Bodrum, Bodrum'un eşsiz doğası içinde konumlanan müstakil villa projesidir. Her villa, özel havuzu ve geniş bahçesiyle size ait bir sığınak sunuyor.</p>
+  <img class="full-img" src="img/mai1.jpg" alt="Maison Bodrum — Huzur Dolu Bir Yaşam">
+</section>
+
+<section class="section section--dark reveal">
+  <p class="section-eyebrow">Rakamlarla Maison Bodrum</p>
+  <h2 class="section-title">13.000 m² İçerisinde <em>50 Müstakil Villa</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Geniş arazi üzerine konumlanan projede, 50 adet müstakil 3+1 villa her biri özel havuzlu olarak sizi bekliyor.</p>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num">13.000</div><div class="stat-label">m² Arazi</div></div>
+    <div class="stat-card"><div class="stat-num">50</div><div class="stat-label">Müstakil Villa</div></div>
+    <div class="stat-card"><div class="stat-num">3+1</div><div class="stat-label">Villa Tipi</div></div>
+  </div>
+  <img class="full-img" src="img/mai2.jpg" alt="Maison Bodrum — 50 Müstakil 3+1 Villa">
+</section>
+
+<section class="section section--dark2 reveal">
+  <p class="section-eyebrow">Standartların Ötesinde</p>
+  <h2 class="section-title">Ayrıcalıklı <em>Yaşam</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Modern mimari çizgileri, geniş cam yüzeyleri ve doğal taş detaylarıyla Maison Bodrum villaları, standartların ötesinde ayrıcalıklı bir yaşam sunuyor.</p>
+  <img class="full-img" src="img/mai3.jpg" alt="Maison Bodrum — Standartların Ötesinde Ayrıcalıklı Yaşam">
+</section>
+
+<section class="section section--dark reveal">
+  <p class="section-eyebrow">Vaziyet Planı</p>
+  <h2 class="section-title">Kapanmayan <em>Manzara</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">A, B ve C Blok olmak üzere üç ayrı bölgede konumlanan villalar, birbirinin manzarasını kapatmayacak şekilde doğa ile uyum içinde tasarlanmıştır.</p>
+  <img class="full-img" src="img/mai4.jpg" alt="Maison Bodrum — Vaziyet Planı">
+</section>
+
+<section class="section section--dark2 reveal">
+  <p class="section-eyebrow">Neden Maison Bodrum?</p>
+  <h2 class="section-title">Kazanç Odaklı <em>Yatırımların Yeni Adresi</em></h2>
+  <div class="gold-line"></div>
+  <div class="features-grid">
+    <div class="feature-item"><div class="feature-icon">🌿</div><div class="feature-text">13.000 m² Yeşil Alan</div></div>
+    <div class="feature-item"><div class="feature-icon">🏊</div><div class="feature-text">Yüzme Havuzu</div></div>
+    <div class="feature-item"><div class="feature-icon">📹</div><div class="feature-text">7/24 Güvenlik</div></div>
+    <div class="feature-item"><div class="feature-icon">💪</div><div class="feature-text">Kapalı Fitness Salonu</div></div>
+    <div class="feature-item"><div class="feature-icon">♨️</div><div class="feature-text">Türk Hamamı &amp; Sauna</div></div>
+    <div class="feature-item"><div class="feature-icon">🏐</div><div class="feature-text">Plaj Voleybol Sahası</div></div>
+    <div class="feature-item"><div class="feature-icon">🐾</div><div class="feature-text">Evcil Hayvan Gezdirme Alanı</div></div>
+    <div class="feature-item"><div class="feature-icon">🍹</div><div class="feature-text">Havuz Bar &amp; Güneş Terası</div></div>
+    <div class="feature-item"><div class="feature-icon">👶</div><div class="feature-text">Çocuk Oyun Alanı</div></div>
+    <div class="feature-item"><div class="feature-icon">🏖️</div><div class="feature-text">Hassas Korunacak Alan Seçimi</div></div>
+  </div>
+  <div style="margin-top:40px;"><img class="full-img" src="img/mai5.jpg" alt="Neden Maison Bodrum — Sosyal Olanaklar"></div>
+</section>
+
+<section class="section section--dark reveal">
+  <p class="section-eyebrow">Mükemmel Konum</p>
+  <h2 class="section-title">Bodrum'un Kalbinde <em>Eşsiz Lokasyon</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Bodrum-Milas Havalimanı'na 15 dk, Bodrum Merkez'e 20 dk, Güvercinlik'e 5 dk mesafede. Doğa, tarih ve denizin iç içe geçtiği bölgede, Ege Bölgesi'nin en büyük golf sahası yanı başınızda.</p>
+  <img class="full-img" src="img/mai6.jpg" alt="Maison Bodrum — Mükemmel Konum Haritası">
+</section>
+
+<section class="section section--dark2 reveal">
+  <p class="section-eyebrow">Müstakil Özel Havuzlu Villalar</p>
+  <h2 class="section-title">Doğanın Güzellikleriyle <em>Yeni Bir Hayata Merhaba</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Her biri müstakil özel havuzlu villalarınızda, doğanın güzellikleriyle her adımınızı yeşile atarken, yeni bir hayata merhaba diyeceksiniz.</p>
+  <img class="full-img" src="img/mai7.jpg" alt="Maison Bodrum — Müstakil Özel Havuzlu Villalar">
+</section>
+
+<section class="section section--dark reveal">
+  <p class="section-eyebrow">İç Mekan Tasarımı</p>
+  <h2 class="section-title">Yeni Nesil <em>Bir Tasarım</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Eşsiz doğa ve flamingo gölü manzarasına uyanacağınız huzurlu bir güne siz de merhaba deyin. Çok şık, yeni nesil tasarım anlayışıyla her detay özenle düşünüldü.</p>
+  <div class="img-trio">
+    <img src="img/mai8.jpg" alt="Maison Bodrum — Yatak Odası">
+    <img src="img/mai9.jpg" alt="Maison Bodrum — Salon">
+    <img src="img/mai10.jpg" alt="Maison Bodrum — Mutfak ve Salon">
+  </div>
+</section>
+
+<section class="section section--dark2 reveal">
+  <p class="section-eyebrow">Kat Planı</p>
+  <h2 class="section-title">C Blok — <em>107,38 m² Villa</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Zemin kat 53,38 m² ve 1. kat 54 m² olmak üzere toplam 107,38 m² kullanım alanlı, veranda ve balkonlu müstakil villalar.</p>
+  <img class="full-img" src="img/mai11.jpg" alt="Maison Bodrum — C Blok Kat Planı">
+</section>
+
+<section class="section section--dark reveal">
+  <p class="section-eyebrow">Yeni Nesil Bir Tasarım</p>
+  <h2 class="section-title">Havuz Manzaralı <em>Yaşam Alanları</em></h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Geniş cam cepheler ile iç mekan ve dış mekanı buluşturan tasarım, her odadan yeşillik ve özel havuz manzarası sunuyor.</p>
+  <img class="full-img" src="img/mai12.jpg" alt="Maison Bodrum — Yeni Nesil Bir Tasarım">
+</section>
+
+<!-- DİĞER PROJELER -->
+<section class="section section--dark2 reveal">
+  <p class="section-eyebrow">Diğer Projelerimiz</p>
+  <h2 class="section-title">Portföyümüzden <em>Keşfedin</em></h2>
+  <div class="gold-line"></div>
+  <div class="img-row">
+    <a href="rovo-bodrum.html" style="text-decoration:none;position:relative;display:block;overflow:hidden;">
+      <img src="img/sat2.jpg" alt="Rovo Bodrum" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);color:#faf8f4;">
+        <div style="font-family:Cormorant Garamond,serif;font-size:1.4rem;font-weight:400;">Rovo Bodrum</div>
+        <div style="font-size:.72rem;color:#d4b896;letter-spacing:.15em;">Bodrum</div>
+      </div>
+    </a>
+    <a href="antpera-kartal.html" style="text-decoration:none;position:relative;display:block;overflow:hidden;">
+      <img src="img/sat3.jpg" alt="Antpera Kartal" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);color:#faf8f4;">
+        <div style="font-family:Cormorant Garamond,serif;font-size:1.4rem;font-weight:400;">Antpera Kartal</div>
+        <div style="font-size:.72rem;color:#d4b896;letter-spacing:.15em;">Kartal</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="cta-bottom reveal">
+  <p class="section-eyebrow">İletişim</p>
+  <h2 class="section-title">Maison Bodrum Hakkında <em>Bilgi Alın</em></h2>
+  <p>Detaylı bilgi ve randevu için uzman kadromuzla iletişime geçin.</p>
+  <a class="btn-gold" href="iletisim.html">Hemen İletişime Geçin <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+</section>
+
+<footer class="page-footer">
+  <span>© Nas Grup | Tüm hakları saklıdır.</span>
+  <span>Ihlamurkuyu Mah. Gümüşsuyu Cad. Meşale Sok. No:4/A, İstanbul/Ümraniye</span>
+</footer>
+
+<div class="floating">
+  <a class="float-btn float-call" href="iletisim.html" title="İletişim">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+  </a>
+</div>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+  document.getElementById('mobileClose').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+  window.addEventListener('scroll', () => document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 40));
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+</script>
+</body>
+</html>
