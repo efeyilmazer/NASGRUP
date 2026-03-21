@@ -227,6 +227,7 @@
       font-style: italic;
       color: var(--gold-light);
     }
+    .mobile-br { display: none; }
 
     .hero-sub {
       font-size: .9rem;
@@ -805,7 +806,7 @@
       transform: translateY(calc(-50% + 16px));
     }
     .slide.active .slide-caption {
-      opacity: 1;
+      opacity: 0.8;
       transform: translateY(-50%);
     }
     .slide-caption h2 {
@@ -956,7 +957,8 @@
         border: 1px solid rgba(180,154,106,.18);
       }
       .hero-eyebrow { font-size: .6rem; letter-spacing: .25em; }
-      .hero-title { font-size: clamp(1.8rem, 6vw, 3rem); text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+      .hero-title { font-size: clamp(2rem, 7vw, 3rem); text-shadow: 0 2px 12px rgba(0,0,0,.5); line-height: 1.1; }
+      .mobile-br { display: inline; }
       .hero-sub { font-size: .82rem; color: var(--text); }
       .slide-caption { display: none; }
       .hero-content {
@@ -974,22 +976,34 @@
         width: 85vw;
         pointer-events: none;
       }
-      .mobile-slide-text p {
+      .mst-item {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        font-size: .82rem;
-        font-weight: 300;
-        color: rgba(255,255,255,.85);
-        line-height: 1.7;
-        letter-spacing: .04em;
-        text-shadow: 0 1px 10px rgba(0,0,0,.5);
         opacity: 0;
         transition: opacity .6s ease;
       }
-      .mobile-slide-text p.active {
-        opacity: 1;
+      .mst-item.active {
+        opacity: 0.8;
+      }
+      .mst-item h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1.15rem, 4.5vw, 1.6rem);
+        font-weight: 400;
+        font-style: italic;
+        color: #fff;
+        line-height: 1.3;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 16px rgba(0,0,0,.5);
+      }
+      .mst-item p {
+        font-size: .78rem;
+        font-weight: 300;
+        color: rgba(255,255,255,.8);
+        line-height: 1.7;
+        letter-spacing: .04em;
+        text-shadow: 0 1px 10px rgba(0,0,0,.5);
       }
 
       /* PROPERTIES */
@@ -1008,7 +1022,7 @@
     }
 
     @media (max-width: 480px) {
-      .hero-title { font-size: 1.7rem; text-shadow: 0 2px 16px rgba(0,0,0,.6); }
+      .hero-title { font-size: 1.9rem; text-shadow: 0 2px 16px rgba(0,0,0,.6); line-height: 1.1; }
       .hero-content { padding: 22px 18px; background: rgba(10,10,10,.6); }
       .section-title { font-size: 1.5rem; }
       .prop-title { font-size: 1.2rem; }
@@ -1087,15 +1101,24 @@
   <div class="hero-orb"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Nas Grup — İstanbul &amp; Bodrum Lüks Gayrimenkul</p>
-    <h1 class="hero-title">Yaşam Kalitenizi<br><em>Arttıracak Mülkler</em></h1>
+    <h1 class="hero-title">Yaşam<br class="mobile-br"> Kalitenizi<br><em>Arttıracak<br class="mobile-br"> Mülkler</em></h1>
     <p class="hero-sub">İstanbul ve Bodrum'un En Prestijli Gayrimenkulleriyle Hayalinizi Gerçekleştirin</p>
 
   </div>
   <!-- Mobile slide captions (shown below hero-content on mobile) -->
   <div class="mobile-slide-text" id="mobileSlideText">
-    <p class="active">Doğanın içinde standartların ötesinde ayrıcalıklı yaşam.</p>
-    <p>Hayalinizdeki yaşam bu villada gerçek oluyor!</p>
-    <p>Doğayla iç içe modern yaşam alanları</p>
+    <div class="mst-item active">
+      <h2>Hayalinizdeki Yaşam<br>Bu Villada Gerçek Oluyor!</h2>
+      <p>Doğanın içinde standartların ötesinde ayrıcalıklı yaşam.</p>
+    </div>
+    <div class="mst-item">
+      <h2>Maison Bodrum<br>Doğanın İçinde</h2>
+      <p>Hayalinizdeki yaşam bu villada gerçek oluyor!</p>
+    </div>
+    <div class="mst-item">
+      <h2>Antpera Kartal<br>Yeni Bir Dönem Başlıyor</h2>
+      <p>Doğayla iç içe modern yaşam alanları</p>
+    </div>
   </div>
   <div class="slider-dots" id="sliderDots">
     <div class="dot active" onclick="goToSlide(0)"></div>
@@ -1362,7 +1385,7 @@
       slides[current].classList.remove('active');
       if (dots[current]) dots[current].classList.remove('active');
       // Sync mobile slide text
-      var mTexts = document.querySelectorAll('#mobileSlideText p');
+      var mTexts = document.querySelectorAll('#mobileSlideText .mst-item');
       if (mTexts[current]) mTexts[current].classList.remove('active');
       current = ((n % slides.length) + slides.length) % slides.length;
       slides[current].classList.add('active');
