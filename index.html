@@ -1328,9 +1328,11 @@
       timer = setInterval(function(){ window.goToSlide(current + 1); }, DURATION);
     };
 
-    // Init
-    startProgress();
-    timer = setInterval(function(){ window.goToSlide(current + 1); }, DURATION);
+    // Don't start yet — wait for loader to finish
+    window.startSlider = function() {
+      startProgress();
+      timer = setInterval(function(){ window.goToSlide(current + 1); }, DURATION);
+    };
   })();
 
   // Reveal on scroll
@@ -1344,7 +1346,7 @@
 </script>
 
 <script>
-// Loading screen - max 5 seconds
+// Loading screen - max 5 seconds, then start slider
 (function(){
   var loader = document.getElementById('nas-loader');
   var maxTimeout = setTimeout(hideLoader, 5000);
@@ -1359,6 +1361,7 @@
       loader.classList.add('fade-out');
       setTimeout(function(){
         loader.remove();
+        if (window.startSlider) window.startSlider();
       }, 600);
     }
   }
